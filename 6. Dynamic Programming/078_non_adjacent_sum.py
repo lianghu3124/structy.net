@@ -17,12 +17,10 @@ def calculate(nums, i, memo):
     if i >= len(nums):
         return 0
 
-    cost = nums[i]
-
     left_result = calculate(nums, i + 2, memo)
     right_result = calculate(nums, i + 1, memo)
 
-    memo[i] = max(cost + left_result, right_result)
+    memo[i] = max(nums[i] + left_result, right_result)
     return memo[i]
 
 

@@ -16,7 +16,7 @@ def befitting_brackets(string):
         if character in brackets:
             stack.append(character)
         else:
-            if stack and stack[-1] == character:
+            if stack and brackets[stack[-1]] == character:
                 stack.pop()
             else:
                 return False

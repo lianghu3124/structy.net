@@ -28,7 +28,7 @@ def topological_order(graph):
         solution.append(current_item)
 
         for child in graph[current_item]:
-            num_parents[child] -= 1
+            num_parents[child] -= 1  # key!
             if num_parents[child] == 0:
                 ready.append(child)
 

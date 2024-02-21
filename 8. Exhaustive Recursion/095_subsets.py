@@ -8,37 +8,36 @@ You may assume that the input list contains unique elements.
 """
 import unittest
 
+# recursive
+def subsets1(elements):
+    if len(elements) == 0:
+        return [[]]
 
-# def subsets(elements):
-#     if len(elements) == 0:
-#         return [[]]
+    first = elements[0]
+    without_first = subsets(elements[1:])
 
-#     first = elements[0]
-#     without_first = subsets(elements[1:])
+    with_first = []
+    for i in without_first:
+        with_first.append([first, *i])
 
-#     with_first = []
-#     for i in without_first:
-#         with_first.append([first, *i])
+    return without_first + with_first
 
-#     return without_first + with_first
-
-
-# def subsets(elements):
-#     """A is an iterable (list, tuple, set, str, etc)
-#     returns a set which is the power set of A.
-#     url: https://stackoverflow.com/questions/1482308/how-to-get-all-subsets-of-a-set-powerset
-#     """
-#     length = len(elements)
-#     powerset = []
-
-#     for i in range(2 ** length):
-#         selector = f'{i:0{length}b}'
-#         subset = [elements[j] for j, bit in enumerate(selector) if bit == '1']
-#         powerset.append(subset)
-
-#     return powerset
-
+# clever!
 def subsets(elements):
+    """A is an iterable (list, tuple, set, str, etc)
+    returns a set which is the power set of A.
+    url: https://stackoverflow.com/questions/1482308/how-to-get-all-subsets-of-a-set-powerset
+    """
+    length = len(elements)
+    powerset = []
+    for i in range(2 ** length):
+        selector = f'{i:0{length}b}'
+        subset = [elements[j] for j, bit in enumerate(selector) if bit == '1']
+        powerset.append(subset)
+    return powerset
+
+# non recursive
+def subsets2(elements):
 
     result = [[]]
     for char in elements:

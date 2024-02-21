@@ -33,6 +33,22 @@ def shortest_path(edges, node_A, node_B):
 
     return -1
 
+def shortest_path2(edges, node_A, node_B):
+    graph = build_graph(edges)
+
+    visited = set()
+    queue = deque([(node_A, 0)])
+
+    while queue:
+        node, distance = queue.popleft()
+        if node == node_B:
+            return distance
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                queue.append((neighbor, distance + 1))
+        visited.add(node)
+    return -1
+
 
 class Test(unittest.TestCase):
     def test_00(self):
@@ -43,7 +59,7 @@ class Test(unittest.TestCase):
             ['z', 'v'],
             ['w', 'v']
         ]
-        assert shortest_path(edges, 'w', 'z') == 2
+        assert shortest_path2(edges, 'w', 'z') == 2
 
     def test_01(self):
         edges = [
@@ -53,7 +69,7 @@ class Test(unittest.TestCase):
             ['z', 'v'],
             ['w', 'v']
         ]
-        assert shortest_path(edges, 'y', 'x') == 1
+        assert shortest_path2(edges, 'y', 'x') == 1
 
     def test_02(self):
         edges = [
@@ -65,7 +81,7 @@ class Test(unittest.TestCase):
             ['e', 'd'],
             ['g', 'f']
         ]
-        assert shortest_path(edges, 'a', 'e') == 3
+        assert shortest_path2(edges, 'a', 'e') == 3
 
     def test_03(self):
         edges = [
@@ -77,7 +93,7 @@ class Test(unittest.TestCase):
             ['e', 'd'],
             ['g', 'f']
         ]
-        assert shortest_path(edges, 'e', 'c') == 2
+        assert shortest_path2(edges, 'e', 'c') == 2
 
     def test_04(self):
         edges = [
@@ -89,7 +105,7 @@ class Test(unittest.TestCase):
             ['e', 'd'],
             ['g', 'f']
         ]
-        assert shortest_path(edges, 'b', 'g') == -1
+        assert shortest_path2(edges, 'b', 'g') == -1
 
     def test_05(self):
         edges = [
@@ -99,7 +115,7 @@ class Test(unittest.TestCase):
             ['c', 'w'],
             ['w', 'e'],
         ]
-        assert shortest_path(edges, 'w', 'e') == 1
+        assert shortest_path2(edges, 'w', 'e') == 1
 
     def test_06(self):
         edges = [
@@ -109,7 +125,7 @@ class Test(unittest.TestCase):
             ['c', 'w'],
             ['w', 'e'],
         ]
-        assert shortest_path(edges, 'n', 'e') == 2
+        assert shortest_path2(edges, 'n', 'e') == 2
 
     def test_07(self):
         edges = [
@@ -121,7 +137,7 @@ class Test(unittest.TestCase):
             ['r', 'q'],
             ['r', 's']
         ]
-        assert shortest_path(edges, 'm', 's') == 6
+        assert shortest_path2(edges, 'm', 's') == 6
 
 
 if __name__ == '__main__':

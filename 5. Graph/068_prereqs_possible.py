@@ -5,7 +5,7 @@ Write a function, prereqs_possible, that takes in a number of courses (n) and pr
 
 
 import unittest
-
+from collections import defaultdict
 
 def prereqs_possible(num_courses: int, prereqs: tuple) -> bool:
     graph = build_graph(num_courses, prereqs)
@@ -37,6 +37,7 @@ def build_graph(num_courses: int, prereqs: tuple) -> dict:
     graph = {}
     for i in range(num_courses):
         graph[i] = []
+    # graph = defaultdict(list)  #this doesn't work, because some leaf node also has to be created.
     for key, val in prereqs:
         graph[key].append(val)
     return graph

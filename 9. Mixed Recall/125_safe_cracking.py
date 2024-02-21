@@ -37,6 +37,7 @@ def get_root(num_parents):
 def count_num_of_parents(graph):
     num_parents = {}
 
+    # can not comine those 2 for loop!
     for node in graph:
         num_parents[node] = 0
 

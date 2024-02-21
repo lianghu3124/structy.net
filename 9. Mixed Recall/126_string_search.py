@@ -28,6 +28,7 @@ def dfs(grid, s, idx, row, col):
         return False
 
     character = grid[row][col]
+    # better than memo
     grid[row][col] = '*'  # instead of memo dict mark location as visited and restore it later
 
     up = (row + 1, col)

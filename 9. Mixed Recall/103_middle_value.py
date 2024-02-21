@@ -13,6 +13,7 @@ class Node:
         self.next = None
 
 
+# fast/slow pointer
 def middle_value(head: Node):
     slow = head
     fast = head

@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
         assert pair_product([3, 2, 5, 4, 1], 10) == (1, 2)
 
     def test_02(self):
-        assert pair_product([4, 7, 9, 2, 5, 1], 5) == (4, 5)
+        assert pair_product([4, 8, 9, 2, 5, 3], 7) == (3, 5)
 
     def test_03(self):
         assert pair_product([4, 7, 9, 2, 5, 1], 35) == (1, 4)

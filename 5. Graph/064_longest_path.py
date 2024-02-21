@@ -11,7 +11,7 @@ def longest_path(graph):
         stack = [(node, 0)]
         while stack:
             current, distance = stack.pop()
-            if not graph[current] and distance > longest:
+            if not graph[current] and distance > longest: # leaf node,
                 longest = distance
                 continue
             for neigbor in graph[current]:
@@ -21,7 +21,7 @@ def longest_path(graph):
 
 
 def longest_path_rec(graph):
-    memo = {}
+    memo = {} #store every node's max length when starting from it.
     for node in graph:
         explore(graph, node, memo)
     return max(memo.values())
@@ -31,7 +31,7 @@ def explore(graph, node, memo):
     if node in memo:
         return memo[node]
 
-    if not graph[node]:
+    if not graph[node]:  # leaf node
         memo[node] = 0
         return memo[node]
 

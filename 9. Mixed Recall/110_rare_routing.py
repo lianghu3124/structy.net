@@ -32,7 +32,7 @@ There are two routes that can be used to travel from city 1 to city 2:
 The answer is False, because routes should be unique.
 """
 import unittest
-
+from collections import defaultdict
 
 def rare_routing(n, roads):
     graph = build_graph(n, roads)
@@ -41,13 +41,13 @@ def rare_routing(n, roads):
     if explore(0, graph, visited, previous=None) == False:
         return False
 
-    for node in graph:
+    for node in graph:  # island, isolated.
         if node not in visited:
             return False
 
     return True
 
-
+# has cycle
 def explore(node, graph, visited, previous):
     if node in visited:
         return False
@@ -55,7 +55,7 @@ def explore(node, graph, visited, previous):
     visited.add(node)
 
     for neigbour in graph[node]:
-        if neigbour != previous:
+        if neigbour != previous:  # don't go backward
             if explore(neigbour, graph, visited, node) == False:
                 return False
 
@@ -63,9 +63,11 @@ def explore(node, graph, visited, previous):
 
 
 def build_graph(n, roads):
-    result = {}
-    for i in range(n):
-        result[i] = []
+    # result = {}
+    # for i in range(n):
+    #     result[i] = []
+    # this doesn't work, cause some island node cases.
+    result = defaultdict(list) 
 
     for r1, r2 in roads:
         result[r1].append(r2)

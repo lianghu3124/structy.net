@@ -18,8 +18,6 @@ def calculate(pos, end, grid, memo):
 
     row, col = pos
     max_row, max_col = end
-    next_row = row + 1
-    next_col = col + 1
 
     if pos in memo:
         return memo[pos]
@@ -28,12 +26,11 @@ def calculate(pos, end, grid, memo):
     if row > max_row or col > max_col:
         return float("-inf")
 
-    result = grid[row][col]
 
-    down_result = calculate((next_row, col), end, grid, memo)
-    right_result = calculate((row, next_col), end, grid, memo)
+    down_result = calculate((row + 1, col), end, grid, memo)
+    right_result = calculate((row, col + 1), end, grid, memo)
 
-    memo[pos] = result + max(down_result, right_result)
+    memo[pos] = grid[row][col] + max(down_result, right_result)
     return memo[pos]
 
 

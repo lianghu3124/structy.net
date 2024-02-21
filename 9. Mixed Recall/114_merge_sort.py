@@ -37,14 +37,16 @@ def combine(list1, list2):
         else:
             result.append(list2_item)
             idx2 += 1
+    result += list1[idx1:]
+    result += list2[idx2:]
+    
+    # while idx1 < len1:
+    #     result.append(list1[idx1])
+    #     idx1 += 1
 
-    while idx1 < len1:
-        result.append(list1[idx1])
-        idx1 += 1
-
-    while idx2 < len2:
-        result.append(list2[idx2])
-        idx2 += 1
+    # while idx2 < len2:
+    #     result.append(list2[idx2])
+    #     idx2 += 1
 
     return result
 

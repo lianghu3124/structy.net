@@ -8,8 +8,8 @@ You may assume that the input list contains unique items.
 """
 import unittest
 
-
-def permutations(items):
+# recursive
+def permutations1(items):
     if not items:
         return [[]]
 
@@ -24,20 +24,41 @@ def permutations(items):
 
     return result
 
+def permutations(items):
+    result = []
+    if not items:
+        return [[]]
+    if len(items) == 1:
+        return [items[:]]
+    
+    for i in range(len(items)):
+        n = items.pop(0)
+        res = permutations(items)
+        for r in res:
+            r.append(n)
+        result.extend(res)
+        items.append(n)
+    return result
 
-# def permutations(items):
-#     result = [[]]
-#     for item in items:
-#         perms = []
-#         for perm in result:
-#             for i in range(len(perm) + 1):
-#                 perms.append(perm[:i] + [item] + perm[i:])
-#         result = perms
-#     return result
 
+# non recursive
+def permutations3(items):
+    result = [[]]
+    for item in items: # add one element and one element
+        perms = []
+        for perm in result:
+            for i in range(len(perm) + 1):
+                perms.append(perm[:i] + [item] + perm[i:])
+        result = perms
+    return result
 
+print(permutations(['a', 'b', 'c']))
+print(permutations(['red', 'blue']))
+print(permutations([8, 2, 1, 4]))
+exit()
 class Test(unittest.TestCase):
     def test_00(self):
+        print()
         assert permutations(['a', 'b', 'c']) == [
             ['a', 'b', 'c'],
             ['b', 'a', 'c'],

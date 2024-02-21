@@ -5,6 +5,7 @@ Write a function, tree_value_count, that takes in the root of a binary tree and 
 
 import unittest
 from node import Node
+from collections import deque
 
 
 def tree_value_count_rec(root: Node, target: int):
@@ -38,6 +39,21 @@ def tree_value_count(root: Node, target: int):
 
     return result
 
+def tree_value_cnt(root: Node, target: int):
+    if not root:
+        return 0
+    cnt = 0
+    queue = deque([root])
+    while queue:
+        cur = queue.pop()
+        if cur.val == target:
+            cnt += 1
+        if cur.left:
+            queue.appendleft(cur.left)
+        if cur.right:
+            queue.appendleft(cur.right)
+    return cnt
+
 
 class Test(unittest.TestCase):
     def test_00(self):
@@ -61,6 +77,7 @@ class Test(unittest.TestCase):
         # 4   6     12
 
         assert tree_value_count(a, 6) == 3
+        assert tree_value_cnt(a, 6) == 3
 
     def test_01(self):
         a = Node(12)
@@ -83,6 +100,7 @@ class Test(unittest.TestCase):
         # 4  6     12
 
         assert tree_value_count(a, 12) == 2
+        assert tree_value_cnt(a, 12) == 2
 
     def test_02(self):
         a = Node(7)
@@ -111,6 +129,7 @@ class Test(unittest.TestCase):
         #   1         1
 
         assert tree_value_count(a, 1) == 4
+        assert tree_value_cnt(a, 1) == 4
 
     def test_03(self):
         a = Node(7)
@@ -139,6 +158,7 @@ class Test(unittest.TestCase):
         #   1         1
 
         assert tree_value_count(a, 9) == 0
+        assert tree_value_cnt(a, 9) == 0
 
     def test_04(self):
         assert tree_value_count(None, 42) == 0

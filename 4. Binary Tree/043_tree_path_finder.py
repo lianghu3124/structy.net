@@ -29,8 +29,8 @@ def path_finder(root, target):
 
 def path_finder_rec(root, target):
     result = _path_finder(root, target)
-    if result:
-        result = result[::-1]
+    # if result:
+    #     result = result[::-1]
     return result
 
 
@@ -44,12 +44,14 @@ def _path_finder(root, target):
     if root.left:
         left = _path_finder(root.left, target)
         if left:
-            left.append(root.val)
+            # left.append(root.val)
+            left.insert(0, root.val)
             return left
     if root.right:
         right = _path_finder(root.right, target)
         if right:
-            right.append(root.val)
+            # right.append(root.val)
+            right.insert(0, root.val)
             return right
 
     return None

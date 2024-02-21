@@ -8,12 +8,28 @@ import unittest
 
 
 def quickest_concat(s, words):
-    result = _quickest_concat(s, words, {})
-    if result == float('inf'):
-        return -1
-    else:
-        return result
-
+    # result = _quickest_concat(s, words, {})
+    # if result == float('inf'):
+    #     return -1
+    # else:
+    #     return result
+    
+    def quick2(startId, mem):
+        if startId == len(s):
+            return 0
+        if startId in mem:
+            return mem[startId]
+        res = float('inf')
+        for w in words:
+            endId = startId+len(w)
+            if endId>len(s): continue
+            if w == s[startId: endId]:
+                tmp = 1+quick2(endId, mem)
+                res = min(res, tmp)
+        mem[startId] = res
+        return res
+    re = quick2(0, {})
+    return -1 if re==float('inf') else re
 
 def _quickest_concat(s, words, memo):
     if s in memo:

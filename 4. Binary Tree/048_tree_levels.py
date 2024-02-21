@@ -11,7 +11,7 @@ def tree_levels(root):
     if not root:
         return []
 
-    queue = [(root, 0)]
+    queue = [(root, 0)]  # it's stack, not queue
     levels = []
 
     while queue:
